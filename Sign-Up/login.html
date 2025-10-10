@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Val Commuters</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Agbalumo&family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Liter&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Squada+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-container-top">
+        <h1>
+          <img src="Logo.svg" alt="Logo Icon" class="logo" /> VAL COMMUTERS
+        </h1>
+        <p>Your travel companion</p>
+      </div>
+
+      <div class="login-container-bottom">
+        <h1>Welcome Back</h1>
+        <p>Login to continue your journey</p>
+
+        <form id="login-form">
+          <label for="email">Email or Phone</label>
+          <div class="input-box">
+            <img src="Mail.svg" alt="Mail Icon" class="input-icon" />
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter your email or phone"
+            />
+          </div>
+
+          <label for="password">Password</label>
+          <div class="input-box">
+            <img src="Lock.svg" alt="Lock Icon" class="input-icon" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+            />
+            <img src="Eye.svg" alt="Eye Icon" class="input-icon right" />
+          </div>
+        </form>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" name="remember" /> Remember me</label>
+          <p class="ref-text">Forgot Password?</p>
+        </div>
+
+        <button type="button" id="login">Login</button>
+        <p id="bottom-text">
+          Don’t have an account? <span class="ref-text">Sign Up</span>
+        </p>
+      </div>
+    </div>
+
+    <script>
+  document.getElementById('login').onclick = function() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    
+    if (email == "" || password == "") {
+      alert("Please fill in all fields");
+      return;
+    }
+    
+    if (!email.includes("@") && isNaN(email)) {
+      alert("Please enter a valid email or phone number");
+      return;
+    }
+    
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
+    
+    alert("Login successful!");
+  }
+</script>
+  </body>
+</html>
