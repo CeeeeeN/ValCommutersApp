@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sign Up | Val Commuters</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+    <body>
+		<div class="container">  <!-- outer wrapper -->
+			<div class="card">  <!-- inner wrapper, content area -->
+				<div class="container-top"> <!-- Logo and Name -->
+                    <div class="logo">
+                        <img src="img/Val Commuters Logo.png">
+                        <h1>VAL COMMUTERS</h1>
+                    </div>
+                    <p class="tagline">Your travel companion</p>
+                </div>
+
+                <div class="container-bottom">  <!-- Main Content -->
+                    <h2>Create Account</h2>
+                    <p class="subtitle">Sign up to start your journey</p>
+
+                    <form class="signup">
+                        <p>Full Name</p>
+                        <div class="box-input">  <!-- input field for full name -->
+                            <img class="icon" src="img/User.png">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+
+                        <p>Email</p>
+                        <div class="box-input">  <!-- input field for email address -->
+                            <img class="icon" src="img/Mail.png">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+
+                        <p>Phone Number</p>
+                        <div class="box-input">  <!-- input field for phone number -->
+                            <img class="icon" src="img/Phone.png">
+                            <input type="tel" placeholder="+63 912 345 6789" required>
+                        </div>
+
+                        <p>Password</p>
+                        <div class="box-input">  <!-- input field for creating a password -->
+                            <img class="icon" src="img\Lock.png">
+                            <input type="password" id="createPassword" placeholder="Create a password" required>
+                            <img class="toggle-password" src="img\eyeClose.png" data-target="createPassword">
+                        </div>
+
+                        <p>Confirm Password</p>
+                        <div class="box-input">  <!-- input field for confirming password -->
+                            <img class="icon" src="img\Lock.png">
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                            <img class="toggle-password" src="img\eyeClose.png" data-target="confirmPassword">
+                        </div>
+
+                        <div class="terms-of-service">   <!-- checkbox for remember me -->
+                            <label>
+                                <input type="checkbox">I agree to the <a href="" class="terms-of-service-links">Terms & Conditions</a> and <a href="" class="terms-of-service-links">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="main-btn">Sign Up</button>
+
+                    <p class="login-text-container">Already have an account? <a href="login.html" class="login-link">Login</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+    </body>
+</html>

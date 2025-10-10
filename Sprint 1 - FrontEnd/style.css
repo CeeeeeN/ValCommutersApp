@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1{
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h2{
+  font-size: 21px;
+}
+
+p{
+  font-size: 14px;
+}
+
+body{
+  font-family: 'Libre Franklin', sans-serif;
+  background: url('img/background-desk.png') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container{
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+}
+
+.card{
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.container-top{
+  background: #2B303A;
+  color: white;
+  text-align: center;
+  padding: 25px 20px;
+}
+
+.container-top .logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.container-top .tagline{
+  font-size: 14px;
+  color: #92DCE5;
+  margin-top: 4px;
+}
+
+.container-bottom{
+  padding: 30px 15px;
+  text-align: left;
+}
+
+.container-bottom h2{
+  margin-bottom: 6px;
+}
+
+.subtitle{
+  color: #7C7C7C;
+  margin-bottom: 25px;
+}
+
+form p{
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.box-input{
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #C3C3C3;
+  border-radius: 10px;
+  padding: 15px 12px;
+  margin-bottom: 20px;
+}
+
+.box-input .icon{
+  margin-right: 8px;
+}
+
+.box-input input{
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+}
+
+.main-btn{
+  width: 100%;
+  background: #D64933;
+  color: white;
+  padding: 14px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.main-btn:hover{
+  background: #772E25;
+  transform: translateY(-2px);
+}
+
+.back-login{
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  color: #D64933;
+  margin-top: 18px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.toggle-password{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.login-remember, .terms-of-service{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.login-remember label, .terms-of-service label{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #7C7C7C;
+  padding-left: 5px;
+}
+
+.forgot-password-link{
+  color: #D64933;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-password-link:hover{
+  text-decoration: underline;
+}
+
+.signup-text-container, .login-text-container{
+  text-align: center;
+  font-size: 14px;
+  margin-top: 18px;
+  color: #7C7C7C;
+}
+
+.signup-link, .login-link{
+  color: #D64933;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-of-service-links{
+  color: #D64933;
+  text-decoration: none;
+}
+
+.back-login:hover, .signup-link:hover, .terms-of-service-links:hover, .login-link:hover, .forgot-password-link:hover{
+  text-decoration: underline; 
+}
+
+@keyframes fadeInUp{
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container{
+    width: auto;
+  }
+
+  .card{
+    width: 360px;
+  }
+
+  .terms-of-service label{
+    font-size: 11px;
+  }
+}
