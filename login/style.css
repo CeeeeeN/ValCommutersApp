@@ -1,0 +1,162 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5; 
+
+    background-image: url('background-desk.png'); 
+    background-size: cover;       
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+
+.login-container{
+    background-color: #FFFFFF;
+    min-height: 456px;
+    width: 318px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.login-container-top{
+    background-color: #2B303A;
+    height: 72px;
+    padding: 10px; 
+    text-align: center;
+}
+
+.login-container-bottom{
+    background-color: #FFFFFF;
+    height: 384px;
+}
+
+.login-container-top h1{
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.login-container-top p{
+    font-size: 13px;
+    color: #92DCE5;
+}
+
+.login-container-bottom h1{
+    font-size: 18px;
+    color: #000000;
+}
+
+.login-container-bottom p{
+    font-size: 13px;
+    color: #7C7C7C;
+    text-align: left;
+}
+
+.login-container-bottom{
+    padding: 10px 10px;
+}
+
+#login-form label, .remember-forgot label{
+    font-size: 13px;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    border-radius: 12px;
+    border-color: #C3C3C3;
+    height: 50px;
+
+}
+
+.ref-text, .remember-forgot p{
+    color: #D64933;
+}
+
+input[type="checkbox"] {
+    width: auto;         
+    height: auto;        
+    margin-right: 5px;   
+    vertical-align: middle;
+}
+
+.remember-forgot {
+    display: flex;                    
+    justify-content: space-between;    
+    align-items: center;             
+    margin: 2px;                   
+}
+
+#login{
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #D64933;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+}
+
+#login:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* slightly stronger shadow on hover */
+    transform: translateY(-2px);
+}
+
+#bottom-text{
+    text-align: center;
+}
+
+p, h1, label, input{
+    font-family: libre franklin;
+}
+
+
+.playfair-display-<uniquifier> {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.icon, .logo {
+  width: 20px;
+  height: 20px;
+}
+
+.form-box{
+    display:none;
+}
+
+.form-box.active{
+    display:block;
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-box input {
+    width: 100%;
+    padding-left: 30px;
+    border: 1px solid #C3C3C3;
+    border-radius: 12px;
+    font-size: 13px;
+    box-sizing: border-box; 
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+}
+
+.input-icon.right {
+    left: auto;
+    right: 10px;
+    cursor: pointer;
+}
