@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map | Val Commuters</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Lexend+Deca:wght@400;500&family=Libre+Franklin:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- ✅ Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+
+  <style>
+    #map {
+      width: 100%;
+      height: 300px;
+      border-radius: 12px;
+    }
+
+    .stop-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .stop-row:hover {
+      background: #e6f0ff;
+    }
+
+    .nearby-stops {
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .nearby-stops::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .nearby-stops::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-bg">
+    <div class="main-card">
+      <div class="logo-header">
+        <img src="logo.png" alt="Logo" class="brand-logo">
+        <div class="brand-text">
+          <span>VAL COMMUTERS</span>
+          <p>Your travel companion</p>
+        </div>
+      </div>
+
+      <div class="form-header">
+        <h2>Vehicle Routes in Valenzuela</h2>
+      </div>
+
+      <div class="route-legend">
+        <h4>Routes:</h4>
+        <div class="route-item">
+          <span class="route-dot route-1"></span>
+          <span>Route 1</span>
+        </div>
+        <div class="route-item">
+          <span class="route-dot route-2"></span>
+          <span>Route 2</span>
+        </div>
+        <div class="route-item">
+          <span class="route-dot route-3"></span>
+          <span>Route 3</span>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div id="map"></div>
+        <div class="location-info">
+          <img src="icons/Map_Pin.svg" alt="Location Icon" class="location-icon">
+          <span>Maysan, Valenzuela City</span>
+        </div>
+      </div>
+
+      <div class="route-card">
+        <div class="nearby-stops">
+          <h3>
+            <img src="icons/Paper_Plane.svg" alt="Stops Icon" class="stops-icon">
+            Nearby Stops
+          </h3>
+
+          <!-- ✅ Complete Terminals List -->
+          <div class="stop-row" data-stop="VGC Terminal"><span>VGC Terminal</span><span class="distance">120m</span></div>
+          <div class="stop-row" data-stop="Karuhatan Terminal"><span>Karuhatan Terminal</span><span class="distance">200m</span></div>
+          <div class="stop-row" data-stop="Maysan Terminal"><span>Maysan Terminal</span><span class="distance">80m</span></div>
+          <div class="stop-row" data-stop="Mavanoda Terminal"><span>Mavanoda Terminal</span><span class="distance">1.2km</span></div>
+          <div class="stop-row" data-stop="MASTODA Terminal"><span>MASTODA Terminal</span><span class="distance">3km</span></div>
+          <div class="stop-row" data-stop="MASTODA Sub - Terminal 1"><span>MASTODA Sub - Terminal 1</span><span class="distance">3.1km</span></div>
+          <div class="stop-row" data-stop="MASTODA Sub - Terminal 3"><span>MASTODA Sub - Terminal 3</span><span class="distance">3.2km</span></div>
+          <div class="stop-row" data-stop="FATATODA Terminal"><span>FATATODA Terminal</span><span class="distance">3.3km</span></div>
+          <div class="stop-row" data-stop="FATATODA Sub - Terminal"><span>FATATODA Sub - Terminal</span><span class="distance">3.4km</span></div>
+          <div class="stop-row" data-stop="FATATODA Terminal 2"><span>FATATODA Terminal 2</span><span class="distance">3.5km</span></div>
+          <div class="stop-row" data-stop="ASCTODA Terminal"><span>ASCTODA Terminal</span><span class="distance">3.6km</span></div>
+          <div class="stop-row" data-stop="MTODA Terminal 1"><span>MTODA Terminal 1</span><span class="distance">3.8km</span></div>
+          <div class="stop-row" data-stop="MTODA Terminal 2"><span>MTODA Terminal 2</span><span class="distance">3.9km</span></div>
+          <div class="stop-row" data-stop="MTODA Terminal 3"><span>MTODA Terminal 3</span><span class="distance">4.0km</span></div>
+          <div class="stop-row" data-stop="MTODA Terminal 4 (Liwayway)"><span>MTODA Terminal 4 (Liwayway)</span><span class="distance">4.1km</span></div>
+          <div class="stop-row" data-stop="EFPTODA Terminal"><span>EFPTODA Terminal</span><span class="distance">4.2km</span></div>
+          <div class="stop-row" data-stop="DOPTODA Terminal"><span>DOPTODA Terminal</span><span class="distance">4.3km</span></div>
+          <div class="stop-row" data-stop="GTDLTODA Terminal"><span>GTDLTODA Terminal</span><span class="distance">4.4km</span></div>
+          <div class="stop-row" data-stop="MAPASATODA Terminal"><span>MAPASATODA Terminal</span><span class="distance">4.5km</span></div>
+          <div class="stop-row" data-stop="SFPTODA Terminal"><span>SFPTODA Terminal</span><span class="distance">4.6km</span></div>
+          <div class="stop-row" data-stop="PAGUBRIJETODA Terminal"><span>PAGUBRIJETODA Terminal</span><span class="distance">4.7km</span></div>
+          <div class="stop-row" data-stop="INTODA Terminal"><span>INTODA Terminal</span><span class="distance">4.8km</span></div>
+          <div class="stop-row" data-stop="GTUTODA Terminal"><span>GTUTODA Terminal</span><span class="distance">4.9km</span></div>
+          <div class="stop-row" data-stop="SQTODA Terminal"><span>SQTODA Terminal</span><span class="distance">5.0km</span></div>
+          <div class="stop-row" data-stop="PMUTODA Terminal"><span>PMUTODA Terminal</span><span class="distance">5.1km</span></div>
+          <div class="stop-row" data-stop="FVTODA Terminal"><span>FVTODA Terminal</span><span class="distance">5.2km</span></div>
+          <div class="stop-row" data-stop="Macanojoda Terminal"><span>Macanojoda Terminal</span><span class="distance">5.3km</span></div>
+	   	  <div class="stop-row" data-stop="Mavanoda Terminal"><span>Mavanoda Terminal</span><span class="distance">5.3km</span></div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="routes.html" class="nav-item">
+          <img src="icons/Paper_Plane.svg" alt="Routes" class="nav-icon">
+          <span>Routes</span>
+        </a>
+        <a href="map.html" class="nav-item active">
+          <img src="icons/Map_Pin.svg" alt="Map" class="nav-icon">
+          <span>Map</span>
+        </a>
+        <a href="account.html" class="nav-item">
+          <img src="icons/User_02.svg" alt="Account" class="nav-icon">
+          <span>Account</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    // ✅ Mapbox Access Token
+    mapboxgl.accessToken = 'pk.eyJ1IjoidmFsY29tbXV0ZXJzIiwiYSI6ImNtaDF5MDc4bjA5OHAyanM5ODFqdnNlN24ifQ.Icx5SXY6609dcG7ItcfS7A';
+
+    // ✅ Initialize Map
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [120.9830, 14.7066],
+      zoom: 13
+    });
+
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // ✅ Stops Data
+    const stops = [
+      { name: "VGC Terminal", coords: [120.9830, 14.7066] },
+      { name: "Karuhatan Terminal", coords: [120.980, 14.710] },
+      { name: "Maysan Terminal", coords: [120.985, 14.715] },
+      { name: "Mavanoda Terminal", coords: [120.972370, 14.693850] },
+      { name: "MASTODA Terminal", coords: [120.9785331, 14.6821576] },
+      { name: "MASTODA Sub - Terminal 1", coords: [120.9800703, 14.6810202] },
+      { name: "MASTODA Sub - Terminal 3", coords: [120.9822409, 14.6807525] },
+      { name: "FATATODA Terminal", coords: [120.9801478, 14.6786276] },
+      { name: "FATATODA Sub - Terminal", coords: [120.9811110, 14.6790483] },
+      { name: "FATATODA Terminal 2", coords: [120.9834875, 14.6804238] },
+      { name: "ASCTODA Terminal", coords: [120.9780111, 14.6824262] },
+      { name: "MTODA Terminal 1", coords: [120.9827228, 14.6740721] },
+      { name: "MTODA Terminal 2", coords: [120.990848, 14.675692] },
+      { name: "MTODA Terminal 3", coords: [120.992750, 14.677758] },
+      { name: "MTODA Terminal 4 (Liwayway)", coords: [120.994981, 14.680327] },
+      { name: "EFPTODA Terminal", coords: [120.981136, 14.674267] },
+      { name: "DOPTODA Terminal", coords: [120.9778165, 14.6811883] },
+      { name: "GTDLTODA Terminal", coords: [120.987430, 14.684210] },
+      { name: "MAPASATODA Terminal", coords: [120.991046, 14.685390] },
+      { name: "SFPTODA Terminal", coords: [120.975033, 14.687552] },
+      { name: "PAGUBRIJETODA Terminal", coords: [120.974872, 14.688651] },
+      { name: "INTODA Terminal", coords: [120.996975, 14.686742] },
+      { name: "GTUTODA Terminal", coords: [121.0087165, 14.6929564] },
+      { name: "SQTODA Terminal", coords: [121.0014923, 14.6878900] },
+      { name: "PMUTODA Terminal", coords: [121.0106820, 14.7049110] },
+      { name: "FVTODA Terminal", coords: [120.9881195, 14.7044778] },
+      { name: "Macanojoda Terminal", coords: [120.970041, 14.693964] },
+	  { name: "Mavanoda Terminal", coords: [120.972370, 14.693850] }
+    ];
+
+    // ✅ Add Markers
+    const stopMarkers = {};
+    stops.forEach(stop => {
+      const marker = new mapboxgl.Marker({ color: "#007aff" })
+        .setLngLat(stop.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<b>${stop.name}</b><br>District II, Valenzuela City`))
+        .addTo(map);
+
+      stopMarkers[stop.name] = marker;
+    });
+
+    // ✅ Clickable Stops
+    document.querySelectorAll('.stop-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const stopName = row.getAttribute('data-stop');
+        const stop = stops.find(s => s.name === stopName);
+        if (stop) {
+          map.flyTo({ center: stop.coords, zoom: 16, speed: 1.2, curve: 1.4 });
+          stopMarkers[stop.name].togglePopup();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
