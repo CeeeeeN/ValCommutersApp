@@ -6,8 +6,6 @@
   <title>Map | Val Commuters</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Lexend+Deca:wght@400;500&family=Libre+Franklin:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- ✅ Mapbox GL JS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
 
@@ -81,65 +79,23 @@
         </div>
       </div>
 
+      <div id="routeOptionsContainer"></div>
+
       <div class="map-card">
         <div id="map"></div>
         <div class="location-info">
           <img src="icons/Map_Pin.svg" alt="Location Icon" class="location-icon">
-          <span>Maysan, Valenzuela City</span>
+          <span id="locationText">Maysan, Valenzuela City</span>
         </div>
       </div>
 
       <div class="route-card">
-        <div class="nearby-stops">
+        <div class="nearby-stops" id="nearbyStopsContainer">
           <h3>
             <img src="icons/Paper_Plane.svg" alt="Stops Icon" class="stops-icon">
             Nearby Stops
           </h3>
-
-          <!-- ✅ Complete Terminals List -->
-          <div class="stop-row" data-stop="VGC Terminal"><span>VGC Terminal</span></div>
-          <div class="stop-row" data-stop="Karuhatan Terminal"><span>Karuhatan Terminal</span></div>
-          <div class="stop-row" data-stop="Maysan Terminal"><span>Maysan Terminal</span></div>
-          <div class="stop-row" data-stop="Mavanoda Terminal"><span>Mavanoda Terminal</span></div>
-          <div class="stop-row" data-stop="MASTODA Terminal"><span>MASTODA Terminal</span></div>
-          <div class="stop-row" data-stop="MASTODA Sub - Terminal 1"><span>MASTODA Sub - Terminal 1</span></div>
-          <div class="stop-row" data-stop="MASTODA Sub - Terminal 3"><span>MASTODA Sub - Terminal 3</span></div>
-          <div class="stop-row" data-stop="FATATODA Terminal"><span>FATATODA Terminal</span></div>
-          <div class="stop-row" data-stop="FATATODA Sub - Terminal"><span>FATATODA Sub - Terminal</span></div>
-          <div class="stop-row" data-stop="FATATODA Terminal 2"><span>FATATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="ASCTODA Terminal"><span>ASCTODA Terminal</span></div>
-          <div class="stop-row" data-stop="ASCTODA Terminal 2"><span>ASCTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 1"><span>MTODA Terminal 1</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 2"><span>MTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 3"><span>MTODA Terminal 3</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 4 (Liwayway)"><span>MTODA Terminal 4 (Liwayway)</span></div>
-          <div class="stop-row" data-stop="EFPTODA Terminal"><span>EFPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="DOPTODA Terminal"><span>DOPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTDLTODA Terminal"><span>GTDLTODA Terminal</span></div>
-          <div class="stop-row" data-stop="MAPASATODA Terminal"><span>MAPASATODA Terminal</span></div>
-          <div class="stop-row" data-stop="SFPTODA Terminal"><span>SFPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="SFPTODA Sub - Terminal 1"><span>SFPTODA Sub - Terminal 1</span></div>
-          <div class="stop-row" data-stop="SFPTODA Sub - Terminal 2"><span>SFPTODA Sub - Terminal 2</span></div>
-          <div class="stop-row" data-stop="PAGUBRIJETODA Terminal"><span>PAGUBRIJETODA Terminal</span></div>
-          <div class="stop-row" data-stop="INTODA Terminal"><span>INTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal"><span>GTUTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal 1"><span>GTUTODA Terminal 1</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal 2"><span>GTUTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="SQTODA Terminal"><span>SQTODA Terminal</span></div>
-          <div class="stop-row" data-stop="PMUTODA Terminal"><span>PMUTODA Terminal</span></div>
-          <div class="stop-row" data-stop="FVTODA Terminal"><span>FVTODA Terminal</span></div>
-          <div class="stop-row" data-stop="Macanojoda Terminal"><span>Macanojoda Terminal</span></div>
-          <div class="stop-row" data-stop="Market Terminal"><span>Market Terminal</span></div>
-          <div class="stop-row" data-stop="MSJDTTODA Terminal"><span>MSJDTTODA Terminal</span></div>
-          <div class="stop-row" data-stop="SANPATODA Terminal"><span>SANPATODA Terminal</span></div>
-          <div class="stop-row" data-stop="SANPATODA Terminal 2"><span>SANPATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal"><span>BALMATODA Terminal</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 2"><span>BALMATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 3"><span>BALMATODA Terminal 3</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 4"><span>BALMATODA Terminal 4</span></div>
-          <div class="stop-row" data-stop="BALMATODA Extension Terminal"><span>BALMATODA Extension Terminal</span></div>
-          <div class="stop-row" data-stop="VCHSTODA Terminal"><span>VCHSTODA Terminal</span></div>
-          <div class="stop-row" data-stop="VCHSTODA Terminal 2"><span>VCHSTODA Terminal 2</span></div>
+          <div id="stopsListContainer"></div>
         </div>
       </div>
 
@@ -161,18 +117,7 @@
   </div>
 
   <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoidmFsY29tbXV0ZXJzIiwiYSI6ImNtaDF5MDc4bjA5OHAyanM5ODFqdnNlN24ifQ.Icx5SXY6609dcG7ItcfS7A';
-
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [120.9830, 14.7066],
-      zoom: 13
-    });
-
-    map.addControl(new mapboxgl.NavigationControl());
-
-    const stops = [
+    const terminals = [
       { name: "VGC Terminal", coords: [120.9830, 14.7066] },
       { name: "Karuhatan Terminal", coords: [120.980, 14.710] },
       { name: "Maysan Terminal", coords: [120.985, 14.715] },
@@ -218,26 +163,213 @@
       { name: "VCHSTODA Terminal 2", coords: [120.988164, 14.6964136] }
     ];
 
-    const stopMarkers = {};
-    stops.forEach(stop => {
-      const marker = new mapboxgl.Marker({ color: "#007aff" })
-        .setLngLat(stop.coords)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<b>${stop.name}</b><br>District II, Valenzuela City`))
-        .addTo(map);
+    const routes = [
+      { name: "Route 1", color: "#d64933", stops: ["VGC Terminal", "Karuhatan Terminal", "Maysan Terminal", "MASTODA Terminal", "FATATODA Terminal"] },
+      { name: "Route 2", color: "#92dce5", stops: ["Mavanoda Terminal", "ASCTODA Terminal", "MTODA Terminal 1", "EFPTODA Terminal", "DOPTODA Terminal"] },
+      { name: "Route 3", color: "#772e25", stops: ["GTDLTODA Terminal", "MAPASATODA Terminal", "SFPTODA Terminal", "INTODA Terminal", "GTUTODA Terminal"] }
+    ];
 
-      stopMarkers[stop.name] = marker;
+    mapboxgl.accessToken = 'pk.eyJ1IjoidmFsY29tbXV0ZXJzIiwiYSI6ImNtaDF5MDc4bjA5OHAyanM5ODFqdnNlN24ifQ.Icx5SXY6609dcG7ItcfS7A';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [120.9830, 14.7066],
+      zoom: 13
     });
 
-    document.querySelectorAll('.stop-row').forEach(row => {
-      row.addEventListener('click', () => {
-        const stopName = row.getAttribute('data-stop');
-        const stop = stops.find(s => s.name === stopName);
-        if (stop) {
-          map.flyTo({ center: stop.coords, zoom: 16, speed: 1.2, curve: 1.4 });
-          stopMarkers[stop.name].togglePopup();
+    map.addControl(new mapboxgl.NavigationControl());
+
+    let allMarkers = [];
+
+    // Add all markers initially
+    terminals.forEach(terminal => {
+      const marker = new mapboxgl.Marker({ color: "#007aff" })
+        .setLngLat(terminal.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<b>${terminal.name}</b>`))
+        .addTo(map);
+      
+      allMarkers.push(marker);
+    });
+
+    // Show default nearby stops
+    showNearbyStops([]);
+
+    // Handle searches
+    map.on('load', () => {
+      // Check for single terminal search (from main search bar)
+      const singleTerminalData = sessionStorage.getItem('searchTerminal');
+      if (singleTerminalData) {
+        const terminal = JSON.parse(singleTerminalData);
+        map.flyTo({ center: terminal.coords, zoom: 16, speed: 1.2 });
+        document.getElementById('locationText').textContent = terminal.name;
+        sessionStorage.removeItem('searchTerminal');
+        return;
+      }
+
+      // Check for route search (from/to inputs)
+      const fromData = sessionStorage.getItem('searchFrom');
+      const toData = sessionStorage.getItem('searchTo');
+
+      if (fromData && toData) {
+        const from = JSON.parse(fromData);
+        const to = JSON.parse(toData);
+
+        const possibleRoutes = findRoutes(from.name, to.name);
+
+        if (possibleRoutes.length > 0) {
+          showRouteOptions(possibleRoutes, from, to);
+          drawRoute(possibleRoutes[0], from, to);
+        } else {
+          alert('No direct routes found between these terminals');
+        }
+
+        sessionStorage.removeItem('searchFrom');
+        sessionStorage.removeItem('searchTo');
+      }
+    });
+
+    function findRoutes(fromName, toName) {
+      const foundRoutes = [];
+
+      routes.forEach(route => {
+        const fromIndex = route.stops.indexOf(fromName);
+        const toIndex = route.stops.indexOf(toName);
+
+        if (fromIndex !== -1 && toIndex !== -1) {
+          const startIndex = Math.min(fromIndex, toIndex);
+          const endIndex = Math.max(fromIndex, toIndex);
+          
+          foundRoutes.push({
+            name: route.name,
+            color: route.color,
+            stops: route.stops.slice(startIndex, endIndex + 1)
+          });
         }
       });
-    });
+
+      return foundRoutes;
+    }
+
+    function showRouteOptions(possibleRoutes, from, to) {
+      const container = document.getElementById('routeOptionsContainer');
+      let html = '<div class="route-options-box"><h3>Available Routes</h3>';
+
+      possibleRoutes.forEach((route, index) => {
+        html += `
+          <div class="route-option-card">
+            <div class="route-option-header">
+              <span class="route-dot" style="background: ${route.color}"></span>
+              <span>${route.name}</span>
+            </div>
+            <div class="route-stops">${route.stops.join(' → ')}</div>
+            <button class="select-route-btn" onclick="selectRoute(${index})">Select This Route</button>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+      container.innerHTML = html;
+
+      window.currentRoutes = possibleRoutes;
+      window.currentFrom = from;
+      window.currentTo = to;
+    }
+
+    window.selectRoute = function(index) {
+      drawRoute(window.currentRoutes[index], window.currentFrom, window.currentTo);
+    };
+
+    function drawRoute(route, from, to) {
+      // Clear all markers
+      allMarkers.forEach(m => m.remove());
+      allMarkers = [];
+
+      // Remove old route
+      if (map.getLayer('route-line')) {
+        map.removeLayer('route-line');
+        map.removeSource('route-line');
+      }
+
+      // Get coordinates for the route
+      const coords = route.stops.map(stopName => {
+        const terminal = terminals.find(t => t.name === stopName);
+        return terminal ? terminal.coords : null;
+      }).filter(c => c !== null);
+
+      // Draw route line
+      map.addSource('route-line', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: coords
+          }
+        }
+      });
+
+      map.addLayer({
+        id: 'route-line',
+        type: 'line',
+        source: 'route-line',
+        paint: {
+          'line-color': route.color,
+          'line-width': 5
+        }
+      });
+
+      // Fit map to route
+      const bounds = new mapboxgl.LngLatBounds();
+      coords.forEach(coord => bounds.extend(coord));
+      map.fitBounds(bounds, { padding: 60 });
+
+      // Add start marker (green)
+      new mapboxgl.Marker({ color: '#00ff00' })
+        .setLngLat(from.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<b>Start:</b> ${from.name}`))
+        .addTo(map);
+
+      // Add end marker (red)
+      new mapboxgl.Marker({ color: '#ff0000' })
+        .setLngLat(to.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<b>End:</b> ${to.name}`))
+        .addTo(map);
+
+      // Update location text
+      document.getElementById('locationText').textContent = `${from.name} → ${to.name}`;
+
+      // Update nearby stops to show only terminals along this route
+      showNearbyStops(route.stops);
+    }
+
+    function showNearbyStops(routeStops) {
+      const container = document.getElementById('stopsListContainer');
+      
+      if (routeStops.length === 0) {
+        // Show all terminals if no route selected
+        container.innerHTML = terminals.map(terminal => 
+          `<div class="stop-row" onclick="flyToTerminal('${terminal.name}')"><span>${terminal.name}</span></div>`
+        ).join('');
+      } else {
+        // Show only terminals along the selected route
+        container.innerHTML = routeStops.map(stopName => 
+          `<div class="stop-row" onclick="flyToTerminal('${stopName}')"><span>${stopName}</span></div>`
+        ).join('');
+      }
+    }
+
+    window.flyToTerminal = function(terminalName) {
+      const terminal = terminals.find(t => t.name === terminalName);
+      if (terminal) {
+        map.flyTo({ 
+          center: terminal.coords, 
+          zoom: 16, 
+          speed: 1.2 
+        });
+        document.getElementById('locationText').textContent = terminal.name;
+      }
+    };
   </script>
 </body>
 </html>
