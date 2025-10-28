@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routes | Val Commuters</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Lexend+Deca:wght@400;500&family=Libre+Franklin:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-bg">
+    <div class="main-card">
+      <div class="logo-header">
+        <img src="logo.png" alt="Logo" class="brand-logo">
+        <div class="brand-text">
+          <span>VAL COMMUTERS</span>
+          <p>Your travel companion</p>
+        </div>
+      </div>
+
+      <div class="route-card">
+        <div class="input-group">
+          <img src="icons\Map_Pin.svg" alt="From Icon" class="input-icon from-icon">
+          <input type="text" placeholder="From (Current Location)" required>
+        </div>
+        <div class="input-group">
+          <img src="icons\Map_Pin.svg" alt="To Icon" class="input-icon to-icon">
+          <input type="text" placeholder="To (Destination)" required>
+        </div>
+        <button class="btn">Find Best Route</button>
+      </div>
+
+      <div class="saved-routes">
+        <h3>Saved Routes</h3>
+        <div class="saved-route-card">
+          <img src="icons\Building_03.svg" alt="Route Icon" class="route-icon">
+          <div class="route-content">
+            <div class="route-title">Home to School</div>
+            <div class="route-sub">Paso de Blas → Maysan</div>
+          </div>
+        </div>
+        <div class="saved-route-card">
+          <img src="icons\Building_04.svg" alt="Route Icon" class="route-icon">
+          <div class="route-content">
+            <div class="route-title">Terminal Route</div>
+            <div class="route-sub">Malinta → Karuhatan</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="bottom-nav">
+        <a href="routes.html" class="nav-item active">
+          <img src="icons\Paper_Plane.svg" alt="Routes" class="nav-icon">
+          <span>Routes</span>
+        </a>
+        <a href="map.html" class="nav-item">
+          <img src="icons\Map_Pin.svg" alt="Map" class="nav-icon">
+          <span>Map</span>
+        </a>
+        <a href="account.html" class="nav-item">
+          <img src="icons\User_02.svg" alt="Account" class="nav-icon">
+          <span>Account</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
