@@ -45,6 +45,13 @@
       background: #ccc;
       border-radius: 4px;
     }
+
+    .empty-message {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 13px;
+    }
   </style>
 </head>
 
@@ -95,7 +102,9 @@
             <img src="icons/Paper_Plane.svg" alt="Stops Icon" class="stops-icon">
             Nearby Stops
           </h3>
-          <div id="stopsListContainer"></div>
+          <div id="stopsListContainer">
+            <div class="empty-message">Search for a route to see stops along the way</div>
+          </div>
         </div>
       </div>
 
@@ -191,9 +200,6 @@
       
       allMarkers.push(marker);
     });
-
-    // Show default nearby stops
-    showNearbyStops([]);
 
     // Handle searches
     map.on('load', () => {
@@ -346,17 +352,10 @@
     function showNearbyStops(routeStops) {
       const container = document.getElementById('stopsListContainer');
       
-      if (routeStops.length === 0) {
-        // Show all terminals if no route selected
-        container.innerHTML = terminals.map(terminal => 
-          `<div class="stop-row" onclick="flyToTerminal('${terminal.name}')"><span>${terminal.name}</span></div>`
-        ).join('');
-      } else {
-        // Show only terminals along the selected route
-        container.innerHTML = routeStops.map(stopName => 
-          `<div class="stop-row" onclick="flyToTerminal('${stopName}')"><span>${stopName}</span></div>`
-        ).join('');
-      }
+      // Show only terminals along the selected route
+      container.innerHTML = routeStops.map(stopName => 
+        `<div class="stop-row" onclick="flyToTerminal('${stopName}')"><span>${stopName}</span></div>`
+      ).join('');
     }
 
     window.flyToTerminal = function(terminalName) {
