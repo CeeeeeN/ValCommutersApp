@@ -1,6 +1,44 @@
+// Landmarks/Locations that map to terminals
+const landmarks = [
+  // Schools
+
+  { name: "Pamantasan ng Lungsod ng Valenzuela (Main)", terminal: "VCHSTODA Terminal" },
+  
+  // Hospitals/Medical
+
+  { name: "Fatima Medical Center", terminal: "FATATODA Terminal" },
+  
+  // Malls/Commercial
+  { name: "Puregold Paso de Blas", terminal: "PMUTODA Terminal" },
+  { name: "Public Market", terminal: "Market Terminal" },
+  { name: "Market", terminal: "Market Terminal" },
+  { name: "SM Valenzuela", terminal: "SQTODA Terminal" },
+  { name: "SM City", terminal: "SQTODA Terminal" },
+  { name: "Jollibee Maysan", terminal: "VCHSTODA Terminal" },
+  { name: "Alfamart Maysan", terminal: "VCHSTODA Terminal" },
+  { name: "7-Eleven Paso de Blas", terminal: "VGC Terminal" },
+  
+  // Barangays/Areas
+  { name: "Paso de Blas", terminal: "VGC Terminal" },
+  { name: "Karuhatan", terminal: "Karuhatan Terminal" },
+  { name: "Maysan", terminal: "Maysan Terminal" },
+  { name: "Malanday", terminal: "GTDLTODA Terminal" },
+  { name: "Ugong", terminal: "SQTODA - Tulay Terminal" },
+  { name: "Malinta", terminal: "Malinta Transport Terminal" },
+  { name: "Marulas", terminal: "MTODA Terminal 1" },
+  { name: "Balangkas", terminal: "BALMATODA Terminal" },
+  { name: "Punturin", terminal: "PMUTODA Terminal" },
+  
+  // Government/Offices
+
+  { name: "3S Center Parada", terminal: "VCHSTODA Terminal 2" }
+];
+
 // Terminal data
 const terminals = [
-  { name: "VGC Terminal", coords: [120.9830, 14.7066] },
+
+  // tricycle terminal
+  { name: "VGC Terminal", coords: [120.992662, 14.709758] },
   { name: "Karuhatan Terminal", coords: [120.980, 14.710] },
   { name: "Maysan Terminal", coords: [120.985, 14.715] },
   { name: "Mavanoda Terminal", coords: [120.972370, 14.693850] },
@@ -29,7 +67,7 @@ const terminals = [
   { name: "GTUTODA Terminal 1", coords: [121.008715, 14.693006] },
   { name: "GTUTODA Terminal 2", coords: [121.001192, 14.688084] },
   { name: "SQTODA Terminal", coords: [121.0014923, 14.6878900] },
-  { name: "PMUTODA Terminal", coords: [120.999438, 14.686221] },
+  { name: "PMUTODA Terminal", coords: [120.99372604219425, 14.708026901313673] },
   { name: "FVTODA Terminal", coords: [120.9881195, 14.7044778] },
   { name: "Macanojoda Terminal", coords: [120.970041, 14.693964] },
   { name: "Market Terminal", coords: [120.9643739, 14.6922034] },
@@ -42,7 +80,14 @@ const terminals = [
   { name: "BALMATODA Terminal 4", coords: [120.9719637, 14.7032287] },
   { name: "BALMATODA Extension Terminal", coords: [120.9787590, 14.7004205] },
   { name: "VCHSTODA Terminal", coords: [120.9793107, 14.6991709] },
-  { name: "VCHSTODA Terminal 2", coords: [120.988164, 14.6964136] }
+  { name: "VCHSTODA Terminal 2", coords: [120.988164, 14.6964136] },
+
+  // jeep terminals
+  { name: "Malinta Transport Terminal", coords: [ 120.969381, 14.694722 ] },
+  { name: "NMJTSC Terminal", coords: [120.969376, 14.694603] },
+  { name: "Karuhatan Jeepney Terminal", coords: [120.976168, 14.689733] },
+  { name: "SQTODA - Tulay Terminal", coords: [121.00142394349109, 14.687952990889581] }
+
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -72,26 +117,45 @@ function setupMainSearchBar() {
       return;
     }
 
-    const matches = terminals.filter(t => t.name.toLowerCase().includes(searchText));
+    // Search both landmarks and terminals
+    const landmarkMatches = landmarks.filter(l => l.name.toLowerCase().includes(searchText));
+    const terminalMatches = terminals.filter(t => t.name.toLowerCase().includes(searchText));
+    
+    // Show landmarks first (in red)
+    landmarkMatches.slice(0, 3).forEach(landmark => {
+      const terminal = terminals.find(t => t.name === landmark.terminal);
+      if (terminal) {
+        const item = document.createElement('div');
+        item.className = 'search-item landmark-item';
+        item.innerHTML = `<strong>${landmark.name}</strong> → ${landmark.terminal}`;
+        
+        item.addEventListener('click', function() {
+          sessionStorage.setItem('searchTerminal', JSON.stringify(terminal));
+          window.location.href = 'map.html';
+        });
+        
+        dropdown.appendChild(item);
+      }
+    });
 
-    if (matches.length === 0) {
-      dropdown.style.display = 'none';
-      return;
-    }
-
-    matches.slice(0, 5).forEach(terminal => {
+    // Then show terminals
+    terminalMatches.slice(0, 3).forEach(terminal => {
       const item = document.createElement('div');
       item.className = 'search-item';
       item.textContent = terminal.name;
       
       item.addEventListener('click', function() {
-        // Go to map page with this terminal
         sessionStorage.setItem('searchTerminal', JSON.stringify(terminal));
         window.location.href = 'map.html';
       });
       
       dropdown.appendChild(item);
     });
+
+    if (landmarkMatches.length === 0 && terminalMatches.length === 0) {
+      dropdown.style.display = 'none';
+      return;
+    }
 
     dropdown.style.display = 'block';
   });
@@ -128,14 +192,26 @@ function createRouteAutocomplete(input) {
       return;
     }
 
-    const matches = terminals.filter(t => t.name.toLowerCase().includes(searchText));
+    // Search both landmarks and terminals
+    const landmarkMatches = landmarks.filter(l => l.name.toLowerCase().includes(searchText));
+    const terminalMatches = terminals.filter(t => t.name.toLowerCase().includes(searchText));
 
-    if (matches.length === 0) {
-      dropdown.style.display = 'none';
-      return;
-    }
+    // Show landmarks first (in red)
+    landmarkMatches.slice(0, 3).forEach(landmark => {
+      const item = document.createElement('div');
+      item.className = 'search-item landmark-item';
+      item.innerHTML = `<strong>${landmark.name}</strong> → ${landmark.terminal}`;
+      
+      item.addEventListener('click', function() {
+        input.value = landmark.terminal;
+        dropdown.style.display = 'none';
+      });
+      
+      dropdown.appendChild(item);
+    });
 
-    matches.slice(0, 5).forEach(terminal => {
+    // Then show terminals
+    terminalMatches.slice(0, 3).forEach(terminal => {
       const item = document.createElement('div');
       item.className = 'search-item';
       item.textContent = terminal.name;
@@ -147,6 +223,11 @@ function createRouteAutocomplete(input) {
       
       dropdown.appendChild(item);
     });
+
+    if (landmarkMatches.length === 0 && terminalMatches.length === 0) {
+      dropdown.style.display = 'none';
+      return;
+    }
 
     dropdown.style.display = 'block';
   });
