@@ -6,8 +6,6 @@
   <title>Map | Val Commuters</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Lexend+Deca:wght@400;500&family=Libre+Franklin:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- ✅ Mapbox GL JS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
 
@@ -47,6 +45,13 @@
       background: #ccc;
       border-radius: 4px;
     }
+
+    .empty-message {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 13px;
+    }
   </style>
 </head>
 
@@ -65,81 +70,30 @@
         <h2>Vehicle Routes in Valenzuela</h2>
       </div>
 
-      <div class="route-legend">
-        <h4>Routes:</h4>
-        <div class="route-item">
-          <span class="route-dot route-1"></span>
-          <span>Route 1</span>
-        </div>
-        <div class="route-item">
-          <span class="route-dot route-2"></span>
-          <span>Route 2</span>
-        </div>
-        <div class="route-item">
-          <span class="route-dot route-3"></span>
-          <span>Route 3</span>
-        </div>
+      <div class="route-legend" id="routeLegend" style="display: none;">
+        <h4>Your Route:</h4>
+        <div id="routeLegendContent"></div>
       </div>
+
+      <div id="routeOptionsContainer"></div>
 
       <div class="map-card">
         <div id="map"></div>
         <div class="location-info">
           <img src="icons/Map_Pin.svg" alt="Location Icon" class="location-icon">
-          <span>Maysan, Valenzuela City</span>
+          <span id="locationText">Maysan, Valenzuela City</span>
         </div>
       </div>
 
       <div class="route-card">
-        <div class="nearby-stops">
+        <div class="nearby-stops" id="nearbyStopsContainer">
           <h3>
             <img src="icons/Paper_Plane.svg" alt="Stops Icon" class="stops-icon">
             Nearby Stops
           </h3>
-
-          <!-- ✅ Complete Terminals List -->
-          <div class="stop-row" data-stop="VGC Terminal"><span>VGC Terminal</span></div>
-          <div class="stop-row" data-stop="Karuhatan Terminal"><span>Karuhatan Terminal</span></div>
-          <div class="stop-row" data-stop="Maysan Terminal"><span>Maysan Terminal</span></div>
-          <div class="stop-row" data-stop="Mavanoda Terminal"><span>Mavanoda Terminal</span></div>
-          <div class="stop-row" data-stop="MASTODA Terminal"><span>MASTODA Terminal</span></div>
-          <div class="stop-row" data-stop="MASTODA Sub - Terminal 1"><span>MASTODA Sub - Terminal 1</span></div>
-          <div class="stop-row" data-stop="MASTODA Sub - Terminal 3"><span>MASTODA Sub - Terminal 3</span></div>
-          <div class="stop-row" data-stop="FATATODA Terminal"><span>FATATODA Terminal</span></div>
-          <div class="stop-row" data-stop="FATATODA Sub - Terminal"><span>FATATODA Sub - Terminal</span></div>
-          <div class="stop-row" data-stop="FATATODA Terminal 2"><span>FATATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="ASCTODA Terminal"><span>ASCTODA Terminal</span></div>
-          <div class="stop-row" data-stop="ASCTODA Terminal 2"><span>ASCTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 1"><span>MTODA Terminal 1</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 2"><span>MTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 3"><span>MTODA Terminal 3</span></div>
-          <div class="stop-row" data-stop="MTODA Terminal 4 (Liwayway)"><span>MTODA Terminal 4 (Liwayway)</span></div>
-          <div class="stop-row" data-stop="EFPTODA Terminal"><span>EFPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="DOPTODA Terminal"><span>DOPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTDLTODA Terminal"><span>GTDLTODA Terminal</span></div>
-          <div class="stop-row" data-stop="MAPASATODA Terminal"><span>MAPASATODA Terminal</span></div>
-          <div class="stop-row" data-stop="SFPTODA Terminal"><span>SFPTODA Terminal</span></div>
-          <div class="stop-row" data-stop="SFPTODA Sub - Terminal 1"><span>SFPTODA Sub - Terminal 1</span></div>
-          <div class="stop-row" data-stop="SFPTODA Sub - Terminal 2"><span>SFPTODA Sub - Terminal 2</span></div>
-          <div class="stop-row" data-stop="PAGUBRIJETODA Terminal"><span>PAGUBRIJETODA Terminal</span></div>
-          <div class="stop-row" data-stop="INTODA Terminal"><span>INTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal"><span>GTUTODA Terminal</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal 1"><span>GTUTODA Terminal 1</span></div>
-          <div class="stop-row" data-stop="GTUTODA Terminal 2"><span>GTUTODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="SQTODA Terminal"><span>SQTODA Terminal</span></div>
-          <div class="stop-row" data-stop="PMUTODA Terminal"><span>PMUTODA Terminal</span></div>
-          <div class="stop-row" data-stop="FVTODA Terminal"><span>FVTODA Terminal</span></div>
-          <div class="stop-row" data-stop="Macanojoda Terminal"><span>Macanojoda Terminal</span></div>
-          <div class="stop-row" data-stop="Market Terminal"><span>Market Terminal</span></div>
-          <div class="stop-row" data-stop="MSJDTTODA Terminal"><span>MSJDTTODA Terminal</span></div>
-          <div class="stop-row" data-stop="SANPATODA Terminal"><span>SANPATODA Terminal</span></div>
-          <div class="stop-row" data-stop="SANPATODA Terminal 2"><span>SANPATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal"><span>BALMATODA Terminal</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 2"><span>BALMATODA Terminal 2</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 3"><span>BALMATODA Terminal 3</span></div>
-          <div class="stop-row" data-stop="BALMATODA Terminal 4"><span>BALMATODA Terminal 4</span></div>
-          <div class="stop-row" data-stop="BALMATODA Extension Terminal"><span>BALMATODA Extension Terminal</span></div>
-          <div class="stop-row" data-stop="VCHSTODA Terminal"><span>VCHSTODA Terminal</span></div>
-          <div class="stop-row" data-stop="VCHSTODA Terminal 2"><span>VCHSTODA Terminal 2</span></div>
+          <div id="stopsListContainer">
+            <div class="empty-message">Search for a route to see stops along the way</div>
+          </div>
         </div>
       </div>
 
@@ -161,6 +115,116 @@
   </div>
 
   <script>
+const terminals = [
+  { name: "VGC Terminal", coords: [120.992662, 14.709758] },
+  { name: "Karuhatan Terminal", coords: [120.980, 14.710] },
+  { name: "Maysan Terminal", coords: [120.985, 14.715] },
+  { name: "Mavanoda Terminal", coords: [120.972370, 14.693850] },
+  { name: "MASTODA Terminal", coords: [120.9785331, 14.6821576] },
+  { name: "MASTODA Sub - Terminal 1", coords: [120.9800703, 14.6810202] },
+  { name: "MASTODA Sub - Terminal 3", coords: [120.9822409, 14.6807525] },
+  { name: "FATATODA Terminal", coords: [120.9801478, 14.6786276] },
+  { name: "FATATODA Sub - Terminal", coords: [120.9811110, 14.6790483] },
+  { name: "FATATODA Terminal 2", coords: [120.9834875, 14.6804238] },
+  { name: "ASCTODA Terminal", coords: [120.9780111, 14.6824262] },
+  { name: "ASCTODA Terminal 2", coords: [120.9758491, 14.6859664] },
+  { name: "MTODA Terminal 1", coords: [120.9827228, 14.6740721] },
+  { name: "MTODA Terminal 2", coords: [120.990848, 14.675692] },
+  { name: "MTODA Terminal 3", coords: [120.992750, 14.677758] },
+  { name: "MTODA Terminal 4 (Liwayway)", coords: [120.994981, 14.680327] },
+  { name: "EFPTODA Terminal", coords: [120.981136, 14.674267] },
+  { name: "DOPTODA Terminal", coords: [120.9778165, 14.6811883] },
+  { name: "GTDLTODA Terminal", coords: [120.987430, 14.684210] },
+  { name: "MAPASATODA Terminal", coords: [120.991046, 14.685390] },
+  { name: "SFPTODA Terminal", coords: [120.975033, 14.687552] },
+  { name: "SFPTODA Sub - Terminal 1", coords: [120.9712381, 14.6828681] },
+  { name: "SFPTODA Sub - Terminal 2", coords: [120.9693657, 14.6817543] },
+  { name: "PAGUBRIJETODA Terminal", coords: [120.974872, 14.688651] },
+  { name: "INTODA Terminal", coords: [120.996975, 14.686742] },
+  { name: "GTUTODA Terminal", coords: [121.0087165, 14.6929564] },
+  { name: "GTUTODA Terminal 1", coords: [121.008715, 14.693006] },
+  { name: "GTUTODA Terminal 2", coords: [121.001192, 14.688084] },
+  { name: "SQTODA Terminal", coords: [121.0014923, 14.6878900] },
+  { name: "PMUTODA Terminal", coords: [120.99372604219425, 14.708026901313673] },
+  { name: "FVTODA Terminal", coords: [120.9881195, 14.7044778] },
+  { name: "Macanojoda Terminal", coords: [120.970041, 14.693964] },
+  { name: "Market Terminal", coords: [120.9643739, 14.6922034] },
+  { name: "MSJDTTODA Terminal", coords: [120.9641026, 14.6924224] },
+  { name: "SANPATODA Terminal", coords: [120.9955959, 14.6875985] },
+  { name: "SANPATODA Terminal 2", coords: [120.9938922, 14.6942838] },
+  { name: "BALMATODA Terminal", coords: [120.9642538, 14.6969740] },
+  { name: "BALMATODA Terminal 2", coords: [120.9659856, 14.6993050] },
+  { name: "BALMATODA Terminal 3", coords: [120.9680714, 14.7011626] },
+  { name: "BALMATODA Terminal 4", coords: [120.9719637, 14.7032287] },
+  { name: "BALMATODA Extension Terminal", coords: [120.9787590, 14.7004205] },
+  { name: "VCHSTODA Terminal", coords: [120.9793107, 14.6991709] },
+  { name: "VCHSTODA Terminal 2", coords: [120.988164, 14.6964136] },
+
+  { name: "Malinta Transport Terminal", coords: [ 120.969381, 14.694722 ] },
+  { name: "NMJTSC Terminal", coords: [120.969376, 14.694603] },
+  { name: "Karuhatan Jeepney Terminal", coords: [120.976168, 14.689733] },
+  { name: "SQTODA - Tulay Terminal", coords: [121.00142394349109, 14.687952990889581] }
+
+];
+
+    // ALL TRICYCLE ROUTES
+    const routes = [
+      // Route 1: VGC to Karuhatan (via PMUTODA, GTUTODA, VCHSTODA)
+      { 
+        name: "Route 1: VGC - Karuhatan", 
+        color: "#d64933", 
+        stops: ["VGC Terminal", "PMUTODA Terminal", "GTUTODA Terminal 1", "VCHSTODA Terminal 2", "Karuhatan Terminal"]
+      },
+      // Route 2: VGC to Karuhatan (via Malinta)
+      { 
+        name: "Route 2: VGC - Karuhatan", 
+        color: "#92dce5", 
+        stops: ["VGC Terminal", "Malinta Transport Terminal", "Karuhatan Terminal"]
+      },
+      // Route: VGC to Maysan
+      { 
+        name: "Route: VGC - Maysan", 
+        color: "#772e25", 
+        stops: ["VGC Terminal", "Maysan Terminal"]
+      },
+      // Route: PMUTODA to GTUTODA
+      { 
+        name: "Route: PMUTODA - GTUTODA", 
+        color: "#ff9800", 
+        stops: ["PMUTODA Terminal", "GTUTODA Terminal"]
+      },
+      // Route: GTUTODA to GTUTODA Terminal 2
+      { 
+        name: "Route: GTUTODA - GTUTODA 2", 
+        color: "#4CAF50", 
+        stops: ["GTUTODA Terminal", "GTUTODA Terminal 2"]
+      },
+      // Route: SQTODA to INTODA
+      { 
+        name: "Route: SQTODA - INTODA", 
+        color: "#9c27b0", 
+        stops: ["SQTODA Terminal", "INTODA Terminal"]
+      },
+      // Route: SQTODA to SANPATODA
+      { 
+        name: "Route: SQTODA - SANPATODA", 
+        color: "#9c27b0", 
+        stops: ["SQTODA Terminal", "SANPATODA Terminal"]
+      },
+      // Route: SQTODA to MAPASATODA
+      { 
+        name: "Route: SQTODA - MAPASATODA", 
+        color: "#9c27b0", 
+        stops: ["SQTODA Terminal", "MAPASATODA Terminal"]
+      },
+      // Route: SQTODA to GTDLTODA
+      { 
+        name: "Route: SQTODA - GTDLTODA", 
+        color: "#9c27b0", 
+        stops: ["SQTODA Terminal", "GTDLTODA Terminal"]
+      }
+    ];
+
     mapboxgl.accessToken = 'pk.eyJ1IjoidmFsY29tbXV0ZXJzIiwiYSI6ImNtaDF5MDc4bjA5OHAyanM5ODFqdnNlN24ifQ.Icx5SXY6609dcG7ItcfS7A';
 
     const map = new mapboxgl.Map({
@@ -172,72 +236,193 @@
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    const stops = [
-      { name: "VGC Terminal", coords: [120.9830, 14.7066] },
-      { name: "Karuhatan Terminal", coords: [120.980, 14.710] },
-      { name: "Maysan Terminal", coords: [120.985, 14.715] },
-      { name: "Mavanoda Terminal", coords: [120.972370, 14.693850] },
-      { name: "MASTODA Terminal", coords: [120.9785331, 14.6821576] },
-      { name: "MASTODA Sub - Terminal 1", coords: [120.9800703, 14.6810202] },
-      { name: "MASTODA Sub - Terminal 3", coords: [120.9822409, 14.6807525] },
-      { name: "FATATODA Terminal", coords: [120.9801478, 14.6786276] },
-      { name: "FATATODA Sub - Terminal", coords: [120.9811110, 14.6790483] },
-      { name: "FATATODA Terminal 2", coords: [120.9834875, 14.6804238] },
-      { name: "ASCTODA Terminal", coords: [120.9780111, 14.6824262] },
-      { name: "ASCTODA Terminal 2", coords: [120.9758491, 14.6859664] },
-      { name: "MTODA Terminal 1", coords: [120.9827228, 14.6740721] },
-      { name: "MTODA Terminal 2", coords: [120.990848, 14.675692] },
-      { name: "MTODA Terminal 3", coords: [120.992750, 14.677758] },
-      { name: "MTODA Terminal 4 (Liwayway)", coords: [120.994981, 14.680327] },
-      { name: "EFPTODA Terminal", coords: [120.981136, 14.674267] },
-      { name: "DOPTODA Terminal", coords: [120.9778165, 14.6811883] },
-      { name: "GTDLTODA Terminal", coords: [120.987430, 14.684210] },
-      { name: "MAPASATODA Terminal", coords: [120.991046, 14.685390] },
-      { name: "SFPTODA Terminal", coords: [120.975033, 14.687552] },
-      { name: "SFPTODA Sub - Terminal 1", coords: [120.9712381, 14.6828681] },
-      { name: "SFPTODA Sub - Terminal 2", coords: [120.9693657, 14.6817543] },
-      { name: "PAGUBRIJETODA Terminal", coords: [120.974872, 14.688651] },
-      { name: "INTODA Terminal", coords: [120.996975, 14.686742] },
-      { name: "GTUTODA Terminal", coords: [121.0087165, 14.6929564] },
-      { name: "GTUTODA Terminal 1", coords: [121.008715, 14.693006] },
-      { name: "GTUTODA Terminal 2", coords: [121.001192, 14.688084] },
-      { name: "SQTODA Terminal", coords: [121.0014923, 14.6878900] },
-      { name: "PMUTODA Terminal", coords: [120.999438, 14.686221] },
-      { name: "FVTODA Terminal", coords: [120.9881195, 14.7044778] },
-      { name: "Macanojoda Terminal", coords: [120.970041, 14.693964] },
-      { name: "Market Terminal", coords: [120.9643739, 14.6922034] },
-      { name: "MSJDTTODA Terminal", coords: [120.9641026, 14.6924224] },
-      { name: "SANPATODA Terminal", coords: [120.9955959, 14.6875985] },
-      { name: "SANPATODA Terminal 2", coords: [120.9938922, 14.6942838] },
-      { name: "BALMATODA Terminal", coords: [120.9642538, 14.6969740] },
-      { name: "BALMATODA Terminal 2", coords: [120.9659856, 14.6993050] },
-      { name: "BALMATODA Terminal 3", coords: [120.9680714, 14.7011626] },
-      { name: "BALMATODA Terminal 4", coords: [120.9719637, 14.7032287] },
-      { name: "BALMATODA Extension Terminal", coords: [120.9787590, 14.7004205] },
-      { name: "VCHSTODA Terminal", coords: [120.9793107, 14.6991709] },
-      { name: "VCHSTODA Terminal 2", coords: [120.988164, 14.6964136] }
-    ];
+    let allMarkers = [];
 
-    const stopMarkers = {};
-    stops.forEach(stop => {
+    // Add all markers
+    terminals.forEach(terminal => {
       const marker = new mapboxgl.Marker({ color: "#007aff" })
-        .setLngLat(stop.coords)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<b>${stop.name}</b><br>District II, Valenzuela City`))
+        .setLngLat(terminal.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<b>${terminal.name}</b>`))
         .addTo(map);
-
-      stopMarkers[stop.name] = marker;
+      
+      allMarkers.push(marker);
     });
 
-    document.querySelectorAll('.stop-row').forEach(row => {
-      row.addEventListener('click', () => {
-        const stopName = row.getAttribute('data-stop');
-        const stop = stops.find(s => s.name === stopName);
-        if (stop) {
-          map.flyTo({ center: stop.coords, zoom: 16, speed: 1.2, curve: 1.4 });
-          stopMarkers[stop.name].togglePopup();
+    map.on('load', () => {
+      const singleTerminalData = sessionStorage.getItem('searchTerminal');
+      if (singleTerminalData) {
+        const terminal = JSON.parse(singleTerminalData);
+        map.flyTo({ center: terminal.coords, zoom: 16, speed: 1.2 });
+        document.getElementById('locationText').textContent = terminal.name;
+        sessionStorage.removeItem('searchTerminal');
+        return;
+      }
+
+      const fromData = sessionStorage.getItem('searchFrom');
+      const toData = sessionStorage.getItem('searchTo');
+
+      if (fromData && toData) {
+        const from = JSON.parse(fromData);
+        const to = JSON.parse(toData);
+
+        const possibleRoutes = findRoutes(from.name, to.name);
+
+        if (possibleRoutes.length > 0) {
+          showRouteOptions(possibleRoutes, from, to);
+          drawRoute(possibleRoutes[0], from, to);
+        } else {
+          alert('No direct routes found between these terminals');
+        }
+
+        sessionStorage.removeItem('searchFrom');
+        sessionStorage.removeItem('searchTo');
+      }
+    });
+
+    function findRoutes(fromName, toName) {
+      const foundRoutes = [];
+
+      routes.forEach(route => {
+        const fromIndex = route.stops.indexOf(fromName);
+        const toIndex = route.stops.indexOf(toName);
+
+        if (fromIndex !== -1 && toIndex !== -1) {
+          const startIndex = Math.min(fromIndex, toIndex);
+          const endIndex = Math.max(fromIndex, toIndex);
+          
+          foundRoutes.push({
+            name: route.name,
+            color: route.color,
+            stops: route.stops.slice(startIndex, endIndex + 1)
+          });
         }
       });
-    });
+
+      return foundRoutes;
+    }
+
+    function showRouteOptions(possibleRoutes, from, to) {
+      const container = document.getElementById('routeOptionsContainer');
+      let html = '<div class="route-options-box"><h3>Available Routes</h3>';
+
+      possibleRoutes.forEach((route, index) => {
+        html += `
+          <div class="route-option-card">
+            <div class="route-option-header">
+              <span class="route-dot" style="background: ${route.color}"></span>
+              <span>${route.name}</span>
+            </div>
+            <div class="route-stops">${route.stops.join(' → ')}</div>
+            <button class="select-route-btn" onclick="selectRoute(${index})">Select This Route</button>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+      container.innerHTML = html;
+
+      // Show route legend with first route
+      const legendContainer = document.getElementById('routeLegend');
+      const legendContent = document.getElementById('routeLegendContent');
+      legendContainer.style.display = 'block';
+      legendContent.innerHTML = `
+        <div class="route-item">
+          <span class="route-dot" style="background: ${possibleRoutes[0].color}"></span>
+          <span>${possibleRoutes[0].name}</span>
+        </div>
+      `;
+
+      window.currentRoutes = possibleRoutes;
+      window.currentFrom = from;
+      window.currentTo = to;
+    }
+
+    window.selectRoute = function(index) {
+      const selectedRoute = window.currentRoutes[index];
+      
+      // Update legend
+      const legendContent = document.getElementById('routeLegendContent');
+      legendContent.innerHTML = `
+        <div class="route-item">
+          <span class="route-dot" style="background: ${selectedRoute.color}"></span>
+          <span>${selectedRoute.name}</span>
+        </div>
+      `;
+      
+      drawRoute(selectedRoute, window.currentFrom, window.currentTo);
+    };
+
+    function drawRoute(route, from, to) {
+      allMarkers.forEach(m => m.remove());
+      allMarkers = [];
+
+      if (map.getLayer('route-line')) {
+        map.removeLayer('route-line');
+        map.removeSource('route-line');
+      }
+
+      const coords = route.stops.map(stopName => {
+        const terminal = terminals.find(t => t.name === stopName);
+        return terminal ? terminal.coords : null;
+      }).filter(c => c !== null);
+
+      map.addSource('route-line', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: coords
+          }
+        }
+      });
+
+      map.addLayer({
+        id: 'route-line',
+        type: 'line',
+        source: 'route-line',
+        paint: {
+          'line-color': route.color,
+          'line-width': 5
+        }
+      });
+
+      const bounds = new mapboxgl.LngLatBounds();
+      coords.forEach(coord => bounds.extend(coord));
+      map.fitBounds(bounds, { padding: 60 });
+
+      new mapboxgl.Marker({ color: '#00ff00' })
+        .setLngLat(from.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<b>Start:</b> ${from.name}`))
+        .addTo(map);
+
+      new mapboxgl.Marker({ color: '#ff0000' })
+        .setLngLat(to.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<b>End:</b> ${to.name}`))
+        .addTo(map);
+
+      document.getElementById('locationText').textContent = `${from.name} → ${to.name}`;
+      showNearbyStops(route.stops);
+    }
+
+    function showNearbyStops(routeStops) {
+      const container = document.getElementById('stopsListContainer');
+      container.innerHTML = routeStops.map(stopName => 
+        `<div class="stop-row" onclick="flyToTerminal('${stopName}')"><span>${stopName}</span></div>`
+      ).join('');
+    }
+
+    window.flyToTerminal = function(terminalName) {
+      const terminal = terminals.find(t => t.name === terminalName);
+      if (terminal) {
+        map.flyTo({ 
+          center: terminal.coords, 
+          zoom: 16, 
+          speed: 1.2 
+        });
+        document.getElementById('locationText').textContent = terminal.name;
+      }
+    };
   </script>
 </body>
 </html>
